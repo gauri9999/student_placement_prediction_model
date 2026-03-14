@@ -40,9 +40,8 @@ hackathons = st.number_input("Hackathons", 0, 10, 0)
 open_source_contributions = st.number_input("Open Source Contributions", 0, 10, 0)
 extracurriculars = st.number_input("Extracurricular Activities", 0, 10, 1)
 
-st.button("Predict Placement"):
-
-```
+if st.button("Predict Placement"):
+    
 df = pd.DataFrame({
     "branch":[branch],
     "college_tier":[college_tier],
@@ -66,8 +65,6 @@ df = pd.DataFrame({
 for col in ["branch","college_tier"]:
     df[col] = encoder[col].transform(df[col])
 
-# Match training features
-df = df.reindex(columns=model.feature_names_in_, fill_value=0)
 
 prediction = model.predict(df)
 
