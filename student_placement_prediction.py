@@ -40,7 +40,7 @@ hackathons = st.number_input("Hackathons", 0, 10, 0)
 open_source_contributions = st.number_input("Open Source Contributions", 0, 10, 0)
 extracurriculars = st.number_input("Extracurricular Activities", 0, 10, 1)
 
-if st.button("Predict Placement"):
+st.button("Predict Placement"):
 
 ```
 df = pd.DataFrame({
