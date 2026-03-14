@@ -72,4 +72,4 @@ if prediction[0] == 1:
     st.success("Student is likely to be Placed")
 else:
     st.error("Student is NOT likely to be Placed")
-```
+
