@@ -42,7 +42,7 @@ extracurriculars = st.number_input("Extracurricular Activities", 0, 10, 1)
 
 if st.button("Predict Placement"):
     
-df = pd.DataFrame({
+  df = pd.DataFrame({
     "branch":[branch],
     "college_tier":[college_tier],
     "cgpa":[cgpa],
