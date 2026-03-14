@@ -60,8 +60,9 @@ if st.button("Predict Placement"):
     "open_source_contributions":[open_source_contributions],
     "extracurriculars":[extracurriculars]
 })
-
-
+# Encode categorical columns
+for col in ["branch","college_tier"]:
+    df[col] = encoder[col].transform(df[col])
 
 prediction = model.predict(df)
 
