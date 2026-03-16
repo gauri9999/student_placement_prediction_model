@@ -12,7 +12,6 @@ import pandas as pd
 import joblib
 
 # Load model and encoder
-
 model = joblib.load("Student_placement_prediction_model.pkl")
 encoder = joblib.load("label_encoder_placement.pkl")
 
@@ -20,7 +19,6 @@ st.title("Student Placement Prediction")
 st.write("Enter student details")
 
 # Inputs
-
 branch = st.selectbox("Branch", encoder["branch"].classes_)
 college_tier = st.selectbox("College Tier", encoder["college_tier"].classes_)
 
@@ -40,34 +38,35 @@ hackathons = st.number_input("Hackathons", 0, 10, 0)
 open_source_contributions = st.number_input("Open Source Contributions", 0, 10, 0)
 extracurriculars = st.number_input("Extracurricular Activities", 0, 10, 1)
 
+# Predict button
 if st.button("Predict Placement"):
-    
-  df = pd.DataFrame({
-    "branch":[branch],
-    "college_tier":[college_tier],
-    "cgpa":[cgpa],
-    "backlogs":[backlogs],
-    "coding_skills":[coding_skills],
-    "dsa_score":[dsa_score],
-    "aptitude_score":[aptitude_score],
-    "communication_skills":[communication_skills],
-    "ml_knowledge":[ml_knowledge],
-    "system_design":[system_design],
-    "internships":[internships],
-    "projects_count":[projects_count],
-    "certifications":[certifications],
-    "hackathons":[hackathons],
-    "open_source_contributions":[open_source_contributions],
-    "extracurriculars":[extracurriculars]
-})
-# Encode categorical columns
-for col in ["branch","college_tier"]:
-    df[col] = encoder[col].transform(df[col])
 
-prediction = model.predict(df)
+    df = pd.DataFrame({
+        "branch":[branch],
+        "college_tier":[college_tier],
+        "cgpa":[cgpa],
+        "backlogs":[backlogs],
+        "coding_skills":[coding_skills],
+        "dsa_score":[dsa_score],
+        "aptitude_score":[aptitude_score],
+        "communication_skills":[communication_skills],
+        "ml_knowledge":[ml_knowledge],
+        "system_design":[system_design],
+        "internships":[internships],
+        "projects_count":[projects_count],
+        "certifications":[certifications],
+        "hackathons":[hackathons],
+        "open_source_contributions":[open_source_contributions],
+        "extracurriculars":[extracurriculars]
+    })
 
-if prediction[0] == 1:
-    st.success("Student is likely to be Placed")
-else:
-    st.error("Student is NOT likely to be Placed")
+    # Encode categorical columns
+    for col in ["branch","college_tier"]:
+        df[col] = encoder[col].transform(df[col])
 
+    prediction = model.predict(df)
+
+    if prediction[0] == 1:
+        st.success("Student is likely to be Placed")
+    else:
+        st.error("Student is NOT likely to be Placed")
